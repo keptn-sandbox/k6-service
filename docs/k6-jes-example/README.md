@@ -39,9 +39,9 @@ This command will create the project `k6-jes` and in the mentioned `GIT_REPO`, h
 Create a `k6-pass` and `k6-fail` service using the command
 
 ```
-keptn create service k6-pass --project example-k6-jes -y
+keptn create service k6-pass --project k6-jes -y
 
-keptn create service k6-fail --project example-k6-jes -y
+keptn create service k6-fail --project k6-jes -y
 ```
 
 This command will create a `k6-pass` service and `k6-fail` service. Both of them will have a job config files for K6 testing. For tutorial purpose only, `k6-pass` will have a passing K6 threshold test file and `k6-fail` will have a failing K6 threshold test. 
@@ -125,3 +125,5 @@ keptn trigger sequence --sequence k6-pass-seq --project k6-jes --service k6-pass
 
 keptn trigger sequence --sequence k6-fail-seq --project k6-jes --service k6-fail --stage production
 ```
+
+You can trigger the sequence from Keptn Bridge.
