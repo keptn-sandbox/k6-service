@@ -127,3 +127,34 @@ keptn trigger sequence --sequence k6-fail-seq --project k6-jes --service k6-fail
 ```
 
 You can trigger the sequence from Keptn Bridge.
+
+### Success Trigger
+
+The Sequence has been successfully triggered can be seen by the log of `job-executor-service started` in the below image
+
+![Success Trigger](./images/success_trigger.png)
+
+### K6-Pass Service
+
+The `k6-pass` service will execute with a `zero exit code` so, it will be finished successfully. We can view the logs given by k6 run command.
+
+![K6 Pass](./images/k6_pass.png)
+
+### K6-Fail Service
+
+The `k6-fail` service will execute with a `non-zero exit code` so, it will be finished as failure.
+
+![K6 Fail](./images/k6_fail.png)
+
+## Debug
+
+- Make sure the resouces are in the correct location. You can use this repo as reference - [jainammm/keptn-k6-jes-tutorial](https://github.com/jainammm/keptn-k6-jes-tutorial)
+- View the logs of Job Executor Service from using the command
+
+```
+kubectl -n keptn-jes logs deployment/job-executor-service -f job-executor-service
+```
+
+## Demo Link
+
+- The Demo Link to this tutorial can be found here - [YouTube](https://www.youtube.com/watch?v=MtjbvnDbhP8)
