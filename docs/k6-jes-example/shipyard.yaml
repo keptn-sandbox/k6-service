@@ -6,9 +6,6 @@ spec:
   stages:
     - name: "production"
       sequences:
-        - name: "k6-pass-seq"
+        - name: "testMyService"
           tasks:
-            - name: "remote-passing-task"
-        - name: "k6-fail-seq"
-          tasks:
-            - name: "remote-failing-task"
+            - name: "test"

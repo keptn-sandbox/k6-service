@@ -1,6 +1,6 @@
 # K6 - Job Executor Service Demo
 
-This tutorial will use Job Executor Service to execute K6 performance testing in a Keptn project.
+This tutorial will use Job Executor Service to execute K6 performance testing in a Keptn project. We'll start with running a K6 script and how the logs look. And then we'll modify the K6 script to see the behaviour when it fails.
 
 ## Setup
 
@@ -15,14 +15,14 @@ The Job Executor Service can be installed using this command
 ```
 JES_VERSION="0.2.0"
 JES_NAMESPACE="keptn-jes"
-TASK_SUBSCRIPTION="sh.keptn.event.remote-passing-task.triggered\,sh.keptn.event.remote-failing-task.triggered" # Events used in current tutorial
+TASK_SUBSCRIPTION="sh.keptn.event.test.triggered" # Events used in current tutorial
 
 helm upgrade --install --create-namespace -n ${JES_NAMESPACE} \
   job-executor-service "https://github.com/keptn-contrib/job-executor-service/releases/download/${JES_VERSION}/job-executor-service-${JES_VERSION}.tgz" \
  --set remoteControlPlane.autoDetect.enabled="true",remoteControlPlane.topicSubscription="${TASK_SUBSCRIPTION}",remoteControlPlane.api.token="",remoteControlPlane.api.hostname="",remoteControlPlane.api.protocol=""
 ```
 
-For more information regarding latest version of Job Executor Service, follow this [Link](https://github.com/keptn-contrib/job-executor-service#install-job-executor-service). In this tutorial, the Job Executor Service should listen to `sh.keptn.event.remote-passing-task.triggered` and `sh.keptn.event.remote-failing-task.triggered` CloudEvents, which can be configured in shipyard file too. 
+For more information regarding latest version of Job Executor Service, follow this [Link](https://github.com/keptn-contrib/job-executor-service#install-job-executor-service). In this tutorial, the Job Executor Service should listen to `sh.keptn.event.test.triggered` CloudEvent, which can be configured in shipyard file. 
 
 ## Creating Project
 
@@ -36,37 +36,25 @@ This command will create the project `k6-jes` and in the mentioned `GIT_REPO`, h
 
 ## Creating Service
 
-Create a `k6-pass` and `k6-fail` service using the command
+Create a `microserviceA` service using the command
 
 ```
-keptn create service k6-pass --project k6-jes -y
-
-keptn create service k6-fail --project k6-jes -y
+keptn create service microserviceA --project k6-jes -y
 ```
 
-This command will create a `k6-pass` service and `k6-fail` service. Both of them will have a job config files for K6 testing. For tutorial purpose only, `k6-pass` will have a passing K6 threshold test file and `k6-fail` will have a failing K6 threshold test. 
+This command will create a `microserviceA` service. It will have a job config file for K6 testing command and file path. 
 
 ## Adding Resources
 
-Next, we'll add config files for both our serives using the commands
-
-- For `k6-pass`
+Next, we'll add config files for `microserviceA` serives using the commands
 
 ```
-keptn add-resource --project k6-jes --service k6-pass --stage production --resource ./production/k6-pass/job/config.yaml --resourceUri job/config.yaml
+keptn add-resource --project k6-jes --service microserviceA --stage production --resource ./production/microserviceA/job/config.yaml --resourceUri job/config.yaml
 
-keptn add-resource --project k6-jes --service k6-pass --stage production --resource ./production/k6-pass/k6_pass_files/passing_threshold.js --resourceUri k6_pass_files/passing_threshold.js
+keptn add-resource --project k6-jes --service microserviceA --stage production --resource ./production/microserviceA/files/k6_test.js --resourceUri files/k6_test.js
 ```
 
-- For `k6-fail`
-
-```
-keptn add-resource --project k6-jes --service k6-fail --stage production --resource ./production/k6-fail/job/config.yaml --resourceUri job/config.yaml
-
-keptn add-resource --project k6-jes --service k6-fail --stage production --resource ./production/k6-fail/k6_fail_files/failing_threshold.js --resourceUri k6_fail_files/failing_threshold.js
-```
-
-This will add `config.yaml` and K6 test files to the `production` branh on `GIT_REPO`. 
+This will add `config.yaml` and K6 test file to the `production` branch on `GIT_REPO`. 
 
 > \* Make sure the resources have been added successfully to the git repo for execution of test *
 
@@ -74,21 +62,21 @@ This will add `config.yaml` and K6 test files to the `production` branh on `GIT_
 
 ### Config
 
-The `config.yaml` for `k6-pass` and `k6-fail` looks like 
+The `config.yaml` for service `microserviceA` looks like 
 
 ```yaml
 apiVersion: v2
 actions:
   - name: "Run k6"
     events:
-      - name: "sh.keptn.event.remote-passing-task.triggered"
+      - name: "sh.keptn.event.test.triggered"
     tasks:
       - name: "Run k6 with Keptn"
         files:
-          - /k6_pass_files
+          - /files
         image: "loadimpact/k6"
         cmd: ["k6"]
-        args: ["run", "--duration", "30s", "--vus", "10", "/keptn/k6_pass_files/passing_threshold.js"]
+        args: ["run", "--duration", "30s", "--vus", "10", "/keptn/files/k6_test.js"]
 ```
 
 K6 docker image is pulled from `loadimpact/k6` and used for execution using the `k6 run` command. The file mentioned would be accessible from `/keptn/<resource-uri>`
@@ -114,19 +102,17 @@ export default function () {
 }
 ```
 
-This file would be used for K6 performance testing. The `http_req_duration` would pass and fail in corresponding services.
+This file would be used for K6 performance testing. 
 
 ## Trigger Sequence
 
-Let's trigger the sequences using the command 
+Let's trigger the sequence using the command 
 
 ```
-keptn trigger sequence --sequence k6-pass-seq --project k6-jes --service k6-pass --stage production
-
-keptn trigger sequence --sequence k6-fail-seq --project k6-jes --service k6-fail --stage production
+keptn trigger sequence --sequence testMyService --project k6-jes --service microserviceA --stage production
 ```
 
-You can trigger the sequence from Keptn Bridge.
+You can trigger the sequence from Keptn Bridge too.
 
 ### Success Trigger
 
@@ -136,13 +122,42 @@ The Sequence has been successfully triggered can be seen by the log of `job-exec
 
 ### K6-Pass Service
 
-The `k6-pass` service will execute with a `zero exit code` so, it will be finished successfully. We can view the logs given by k6 run command.
+The `microserviceA` service will execute with a `zero exit code`, therefore it will be finished successfully. We can view the logs given by k6 run command.
 
 ![K6 Pass](./images/k6_pass.png)
 
+## Failing K6 Test
+
+We'll see how the service fails when the K6 performance testing fails. In `k6_test.js` file, we'll change the threshold from `500ms` to `5ms`... Forcing it to fail!
+
+```js
+export const options = {
+  thresholds: {
+    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
+    http_req_duration: ['p(95)<5'], // 95% of requests should be below 5ms... Force Fail :)
+  },
+};
+```
+
+We'll have to update the resources on ***Git Upstream***. You can do that manually in the `production` branch or by using this command
+
+```
+keptn add-resource --project k6-jes --service microserviceA --stage production --resource ./production/microserviceA/files/k6_test_fail.js --resourceUri files/k6_test.js
+```
+
+Here, the `k6_test_fail.js` will replace the `k6_test.js` in Git repo.
+
+### Trigger Sequence Again
+
+Let's re-run the Service using the same command to trigger the sequence 
+
+```
+keptn trigger sequence --sequence testMyService --project k6-jes --service microserviceA --stage production
+```
+
 ### K6-Fail Service
 
-The `k6-fail` service will execute with a `non-zero exit code` so, it will be finished as failure.
+Due to the change in K6 test script, now the service `microserviceA` will execute with a `non-zero exit code`, hence it will be finished as failure. 
 
 ![K6 Fail](./images/k6_fail.png)
 
