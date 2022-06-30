@@ -6,7 +6,7 @@ This tutorial will use Job Executor Service to execute K6 performance testing in
 
 ### Install Keptn 
 
-Setup Keptn from [quickstart guide](https://keptn.sh/docs/quickstart/)
+Setup Keptn from the [quickstart guide](https://keptn.sh/docs/quickstart/)
 
 ### Install Job Executor Service
 
@@ -24,6 +24,8 @@ helm upgrade --install --create-namespace -n ${JES_NAMESPACE} \
 
 For more information regarding latest version of Job Executor Service, follow this [Link](https://github.com/keptn-contrib/job-executor-service#install-job-executor-service). In this tutorial, the Job Executor Service should listen to `sh.keptn.event.test.triggered` CloudEvent, which can be configured in shipyard file. 
 
+> If you have Job Executor Service installed already, please directly subscribe to `sh.keptn.event.test.triggered` event from Bridge after creating Keptn Project.
+
 ## Creating Project
 
 Create a new Keptn project using the following command
@@ -32,7 +34,7 @@ Create a new Keptn project using the following command
 keptn create project k6-jes --shipyard=./shipyard.yaml --git-user=<GIT_USER> --git-token=<GIT_TOKEN> --git-remote-url=<UNINTIALIZED_GIT_REPO_URL>
 ```
 
-This command will create the project `k6-jes` and in the mentioned `GIT_REPO`, have `shipyard.yaml` file in master branch and initialize the `production` branch based on the stage mentioned in the [file](./shipyard.yaml). 
+This command will create the project `k6-jes` and in the mentioned `GIT_REPO`, have a `shipyard.yaml` file in the `master` branch and initialize the `production` branch based on the stage mentioned in the [file](./shipyard.yaml). 
 
 ## Creating Service
 
@@ -42,7 +44,7 @@ Create a `microserviceA` service using the command
 keptn create service microserviceA --project k6-jes -y
 ```
 
-This command will create a `microserviceA` service. It will have a job config file for K6 testing command and file path. 
+This command will create a `microserviceA` service. It will have a job config file for the K6 testing command and file path. 
 
 ## Adding Resources
 
@@ -56,7 +58,7 @@ keptn add-resource --project k6-jes --service microserviceA --stage production -
 
 This will add `config.yaml` and K6 test file to the `production` branch on `GIT_REPO`. 
 
-> \* Make sure the resources have been added successfully to the git repo for execution of test *
+> \* Make sure the resources have been added successfully to the git repo for the execution of test *
 
 ## Understanding Resources
 
@@ -120,9 +122,9 @@ The Sequence has been successfully triggered can be seen by the log of `job-exec
 
 ![Success Trigger](./images/success_trigger.png)
 
-### K6-Pass Service
+### K6 Execution Logs
 
-The `microserviceA` service will execute with a `zero exit code`, therefore it will be finished successfully. We can view the logs given by k6 run command.
+The `microserviceA` service will execute with a `zero exit code`, therefore it will be finished successfully. We can view the logs given by the k6 run command.
 
 ![K6 Pass](./images/k6_pass.png)
 
@@ -145,7 +147,7 @@ We'll have to update the resources on ***Git Upstream***. You can do that manual
 keptn add-resource --project k6-jes --service microserviceA --stage production --resource ./production/microserviceA/files/k6_test_fail.js --resourceUri files/k6_test.js
 ```
 
-Here, the `k6_test_fail.js` will replace the `k6_test.js` in Git repo.
+Here, the `k6_test_fail.js` will replace the `k6_test.js` in the Git repo.
 
 ### Trigger Sequence Again
 
@@ -155,16 +157,16 @@ Let's re-run the Service using the same command to trigger the sequence
 keptn trigger sequence --sequence testMyService --project k6-jes --service microserviceA --stage production
 ```
 
-### K6-Fail Service
+### K6 Fail Logs
 
-Due to the change in K6 test script, now the service `microserviceA` will execute with a `non-zero exit code`, hence it will be finished as failure. 
+Due to the change in the K6 test script, now the service `microserviceA` will execute with a `non-zero exit code`, hence it will be finished as a failure. 
 
 ![K6 Fail](./images/k6_fail.png)
 
 ## Debug
 
-- Make sure the resouces are in the correct location. You can use this repo as reference - [jainammm/keptn-k6-jes-tutorial](https://github.com/jainammm/keptn-k6-jes-tutorial)
-- View the logs of Job Executor Service from using the command
+- Make sure the resources are in the correct location. You can use this repo as a reference - [jainammm/keptn-k6-jes-tutorial](https://github.com/jainammm/keptn-k6-jes-tutorial)
+- View the logs of Job Executor Service by using the command
 
 ```
 kubectl -n keptn-jes logs deployment/job-executor-service -f job-executor-service
