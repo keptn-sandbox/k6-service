@@ -1,0 +1,12 @@
+apiVersion: v2
+actions:
+  - name: "Run k6"
+    events:
+      - name: "sh.keptn.event.test.triggered"
+    tasks:
+      - name: "Run k6 with Keptn"
+        files:
+          - /files
+        image: "loadimpact/k6"
+        cmd: ["k6"]
+        args: ["run", "--duration", "30s", "--vus", "10", "/keptn/files/k6_test.js"]
