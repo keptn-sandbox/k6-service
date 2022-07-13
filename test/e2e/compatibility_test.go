@@ -1,11 +1,12 @@
 package e2e
 
 import (
-	"github.com/keptn/go-utils/pkg/api/models"
-	"github.com/stretchr/testify/require"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/keptn/go-utils/pkg/api/models"
+	"github.com/stretchr/testify/require"
 )
 
 const shipyard = `apiVersion: "spec.keptn.sh/0.2.0"
@@ -63,7 +64,7 @@ const sliTriggeredEvent = `
           "response_time_p95",
           "some_other_metric"
         ],
-        "sliProvider": "keptn-service-template-go",
+        "sliProvider": "k6-service",
         "start": "2021-01-15T15:04:45.000Z"
       },
       "labels": null,
@@ -120,7 +121,7 @@ func Test_ActionTriggered(t *testing.T) {
 		func(_ *models.KeptnContextExtendedCE) bool {
 			return true
 		},
-		"keptn-service-template-go",
+		"k6-service",
 	)
 
 	// Checking if the service-template-go responded with a .finished event
@@ -133,7 +134,7 @@ func Test_ActionTriggered(t *testing.T) {
 		func(_ *models.KeptnContextExtendedCE) bool {
 			return true
 		},
-		"keptn-service-template-go",
+		"k6-service",
 	)
 }
 
@@ -175,7 +176,7 @@ func Test_SLITriggered(t *testing.T) {
 		func(_ *models.KeptnContextExtendedCE) bool {
 			return true
 		},
-		"keptn-service-template-go",
+		"k6-service",
 	)
 
 	// Checking if the service-template-go responded with a .finished event
@@ -188,6 +189,6 @@ func Test_SLITriggered(t *testing.T) {
 		func(_ *models.KeptnContextExtendedCE) bool {
 			return true
 		},
-		"keptn-service-template-go",
+		"k6-service",
 	)
 }

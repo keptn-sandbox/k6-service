@@ -1,4 +1,4 @@
-module example.com/keptn-service-template-go
+module example.com/k6-service
 
 go 1.17
 

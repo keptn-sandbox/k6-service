@@ -41,7 +41,7 @@ type envConfig struct {
 }
 
 // ServiceName specifies the current services name (e.g., used as source when sending CloudEvents)
-const ServiceName = "keptn-service-template-go"
+const ServiceName = "k6-service"
 
 /**
  * Parses a Keptn Cloud Event payload (data attribute)
@@ -63,7 +63,6 @@ func parseKeptnCloudEventPayload(event cloudevents.Event, data interface{}) erro
 func processKeptnCloudEvent(ctx context.Context, event cloudevents.Event) error {
 	// create keptn handler
 	log.Printf("Initializing Keptn Handler")
-	log.Printf("jainam-log")
 	myKeptn, err := keptnv2.NewKeptn(&event, keptnOptions)
 	if err != nil {
 		return errors.New("Could not create Keptn Handler: " + err.Error())
@@ -527,8 +526,7 @@ func _main(args []string, env envConfig) int {
 
 	keptnOptions.ConfigurationServiceURL = env.ConfigurationServiceUrl
 
-	log.Println("Starting keptn-service-template-go...")
-	log.Println("jainam-log")
+	log.Println("Starting k6-service...")
 	log.Printf("    on Port = %d; Path=%s", env.Port, env.Path)
 
 	ctx, _ := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)

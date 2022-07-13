@@ -1,9 +1,9 @@
 image:
-  repository: docker.io/jvenom/keptn-service-template-go # Container Image Name
+  repository: docker.io/jvenom/k6-service # Container Image Name
   pullPolicy: IfNotPresent                   # Kubernetes Image Pull Policy
   tag: "dev"                                    # Container Tag
 service:
-  enabled: true                              # Creates a Kubernetes Service for the keptn-service-template-go
+  enabled: true                              # Creates a Kubernetes Service for the k6-service
 
 distributor:
   stageFilter: ""                            # Sets the stage this helm service belongs to

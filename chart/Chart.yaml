@@ -1,6 +1,6 @@
 apiVersion: v2
-name: keptn-service-template-go
-description: Helm Chart for the keptn keptn-service-template-go
+name: k6-service
+description: Helm Chart for the keptn k6-service
 
 # A chart can be either an 'application' or a 'library' chart.
 #
