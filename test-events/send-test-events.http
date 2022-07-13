@@ -6,51 +6,12 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-# send service.create.finished test-event
+# send test.triggered test-event
 POST http://localhost:8080/
 Accept: application/json
 Cache-Control: no-cache
 Content-Type: application/cloudevents+json
 
-< ./service.create.finished.json
-###
-
-# send action.triggered test-event
-POST http://localhost:8080/
-Accept: application/json
-Cache-Control: no-cache
-Content-Type: application/cloudevents+json
-
-< ./action.triggered.json
-
-###
-
-# send deployment.triggered test-event
-POST http://localhost:8080/
-Accept: application/json
-Cache-Control: no-cache
-Content-Type: application/cloudevents+json
-
-< ./deployment.triggered.json
-
-###
-
-# send evaluation.triggered test-event
-POST http://localhost:8080/
-Accept: application/json
-Cache-Control: no-cache
-Content-Type: application/cloudevents+json
-
-< ./evaluation.triggered.json
-
-###
-
-# send get-sli.triggered test-event
-POST http://localhost:8080/
-Accept: application/json
-Cache-Control: no-cache
-Content-Type: application/cloudevents+json
-
-< ./get-sli.triggered.json
+< ./test.triggered.json
 
 ###

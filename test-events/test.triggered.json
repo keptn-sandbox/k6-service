@@ -1,5 +1,5 @@
 {
-    "type": "sh.keptn.event.action.triggered",
+    "type": "sh.keptn.event.test.triggered",
     "specversion": "1.0",
     "source": "test-events",
     "id": "f2b878d3-03c0-4e8f-bc3f-454bc1b3d79b",
@@ -18,13 +18,12 @@
       "status": "succeeded",
       "result": "pass",
   
-      "action": {
-        "name": "my action name",
-        "action": "action-xyz",
-        "description": "so something as defined in remediation.yaml",
-        "value" : "1"
+      "test": {
+        "teststrategy": "functional"
       },
-      "problem": {
+      "deployment": {
+        "deploymentURIsLocal": ["DeploymentURILocal1", "DeploymentURILocal2"],
+        "deploymentURIsPublic": ["DeploymentURIsPublicA", "DeploymentURIsPublicB"]
       }
     }
   }
