@@ -13,3 +13,9 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# vscode dependency
+.vscode
+
+# Go build project binary
+k6-service
