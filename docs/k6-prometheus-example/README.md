@@ -252,3 +252,26 @@ Once this is done we can create a new Dashboard and add Panels by selecting the 
 Once the panels are added, we can se the time series data written by K6. I have selected `p95 request duration` metrics and from the `K6 stdout`, we saw it came around `7.8 seconds`. We ran the tests for `90 seconds`.
 
 ![Grafana K6 p95 Request Duration](./images/grafana_p95_req_duration.png)
+
+## Debug
+
+### Remote Write Not Enabled
+
+The below logs are given by `K6` if `Prometheus` is not setup with remote write enabled
+```bash
+time="2022-08-24T17:13:10Z" level=error msg="Failed to store timeseries." error="server returned HTTP status 404 Not Found: remote write receiver needs to be enabled with --enable-feature=remote-write-receiver"
+```
+
+> Make sure the `prometheus-server` deployment has been edited correctly in [this](#enabling-remote-write-in-prometheus) step and the deployment has restarted. You can check the status using the command
+```bash
+kubectl rollout status deployment/prometheus-server
+```
+
+### Secrets not found
+
+The below logs show that K8s secrets were not found by Job Executor Service
+```bash
+Job job-executor-service-job-2f6fe6d6-9a86-440b-9991-4d79-1 failed: could not prepare env for job job-executor-service-job-2f6fe6d6-9a86-440b-9991-4d79-1: could not add env with name k6-details, valueFrom secret: secrets "k6-details" not found
+```
+
+> For this, make sure the `namespace` given in [Setting Environment Variables](#setting-environment-variable) is of Job Executor Service only
