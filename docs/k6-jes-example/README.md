@@ -83,7 +83,7 @@ actions:
 
 K6 docker image is pulled from `loadimpact/k6` and used for execution using the `k6 run` command. The file mentioned would be accessible from `/keptn/<resource-uri>`
 
-Any custom K6 Docker image could be used here, along with K6 binary created using K6 extensions. A common example would be [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote). 
+Any custom K6 Docker image could be used here, along with K6 binary created using K6 extensions. A common example would be [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote). We'll take a look at K6 extensions in the [next tutorial](../k6-prometheus-example/README.md)
 
 ### K6 files
 
@@ -175,3 +175,7 @@ kubectl -n keptn-jes logs deployment/job-executor-service -f job-executor-servic
 ## Demo Link
 
 - The Demo Link to this tutorial can be found here - [YouTube](https://www.youtube.com/watch?v=MtjbvnDbhP8)
+
+## Next Tutorial
+
+Please follow the [next tutorial](../k6-prometheus-example/README.md) for running K6 Extension (Prometheus Output) in Job Executor Service.
