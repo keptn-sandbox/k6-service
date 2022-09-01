@@ -60,6 +60,8 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm install prometheus prometheus-community/prometheus
 ```
 
+For more information please follow this [link](https://artifacthub.io/packages/helm/prometheus-community/prometheus)
+
 #### Enabling Remote Write in Prometheus
 
 This will install Prometheus on K8s. For K6 extension of Prometheus, we have to enable remote write too for accessing the `api/write/v1` API. We need to edit the `prometheus-server` deployment for that. We can do this by using the command
@@ -93,6 +95,8 @@ helm repo add grafana https://grafana.github.io/helm-charts
 
 helm install grafana grafana/grafana
 ```
+
+For more information please follow this [link](https://github.com/grafana/helm-charts)
 
 Now that setup of Keptn, JES, Keptn project for running K6, Prometheus and Grafana is done, let's dive into steps for using K6 Extensions in Keptn.
 
@@ -278,4 +282,4 @@ Job job-executor-service-job-2f6fe6d6-9a86-440b-9991-4d79-1 failed: could not pr
 
 ## Demo Video
 
-In this video I have presented the demo for the whole K6 using Job Executor Service demo - [Youtube](https://www.youtube.com/watch?v=h0eAzoOnaqY)
+In this video I have presented the demo for the whole K6 using Job Executor Service demo - [Youtube](https://youtu.be/h0eAzoOnaqY?t=358)
