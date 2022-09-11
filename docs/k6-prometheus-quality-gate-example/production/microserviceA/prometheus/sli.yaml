@@ -1,0 +1,4 @@
+---
+spec_version: '1.0'
+indicators:
+  k6_http_req_duration_p95_sli: k6_http_req_duration_p95{job='$SERVICE-$PROJECT-$STAGE'}

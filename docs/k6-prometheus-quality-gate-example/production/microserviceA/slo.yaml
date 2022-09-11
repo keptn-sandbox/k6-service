@@ -1,0 +1,17 @@
+---
+spec_version: '0.1.0'
+comparison:
+  compare_with: "single_result"
+  include_result_with_score: "pass"
+  aggregate_function: avg
+objectives:
+  - sli: k6_http_req_duration_p95_sli
+    pass:
+      - criteria:
+          - "<1000"
+    warning:
+      - criteria:
+          - "<500"
+total_score:
+  pass: "90%"
+  warning: "75%"
