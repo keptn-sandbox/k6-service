@@ -38,7 +38,7 @@ This is how K6 extension can be used. Let's take a look at how we can use Job Ex
 
 ## Setup
 
-We'll need two things set-up for this tutorial: 
+We'll need three things set-up for this tutorial: 
 1. Project running K6 using Job Executor Service
 2. Prometheus installation
 3. Grafana Installation
@@ -283,3 +283,7 @@ Job job-executor-service-job-2f6fe6d6-9a86-440b-9991-4d79-1 failed: could not pr
 ## Demo Video
 
 In this video I have presented the demo for the whole K6 using Job Executor Service demo - [Youtube](https://youtu.be/h0eAzoOnaqY?t=358)
+
+## Next Tutorial
+
+Please follow the [next tutorial](../k6-prometheus-quality-gate-example/README.md) for running Quality Gates Evaluation on these metrics exported by K6 to Prometheus.

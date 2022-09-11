@@ -4,7 +4,7 @@ This tutorial will use Job Executor Service to execute K6 performance testing in
 
 ## What is Keptn?
 
-Keptn is an event-driven orchestration engine that connects observability with operations in cloud-native applications. The project uses a declarative approach to build scalable automation for delivery and operations, evaluates Service Level Indicators (SLOs), and provides a dashboard, alerts, and auto-remediation for them. It allows us to define multi-stage delivery pipelines declaratively. 
+[Keptn](https://keptn.sh/) is an event-driven orchestration engine that connects observability with operations in cloud-native applications. The project uses a declarative approach to build scalable automation for delivery and operations, evaluates Service Level Indicators (SLOs), and provides a dashboard, alerts, and auto-remediation for them. It allows us to define multi-stage delivery pipelines declaratively. 
 
 Keptn allows you to pick a use case and automate & integrate it in a more general way. Depending on the use case, you bring a configuration. For instance: 
 1. Quality Gates <> SLI/SLO config 
@@ -15,7 +15,7 @@ Keptn allows you to pick a use case and automate & integrate it in a more genera
 
 This will the workflow of events in this tutorial.
 
-![Keptn JES ](./images/keptn_jes_k6_workflow.jpg)
+![Keptn JES K6 Workflow](./images/keptn_jes_k6_workflow.jpg)
 
 ## Setup
 
