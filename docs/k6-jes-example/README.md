@@ -2,6 +2,21 @@
 
 This tutorial will use Job Executor Service to execute K6 performance testing in a Keptn project. We'll start with running a K6 script and how the logs look. And then we'll modify the K6 script to see the behaviour when it fails.
 
+## What is Keptn?
+
+Keptn is an event-driven orchestration engine that connects observability with operations in cloud-native applications. The project uses a declarative approach to build scalable automation for delivery and operations, evaluates Service Level Indicators (SLOs), and provides a dashboard, alerts, and auto-remediation for them. It allows us to define multi-stage delivery pipelines declaratively. 
+
+Keptn allows you to pick a use case and automate & integrate it in a more general way. Depending on the use case, you bring a configuration. For instance: 
+1. Quality Gates <> SLI/SLO config 
+2. Progressive Delivery <> Shipyard file
+3. Remediation <> Runbook for fixing systems
+
+## Keptn Job Executor Service & K6 Test Workflow
+
+This will the workflow of events in this tutorial.
+
+![Keptn JES ](./images/keptn_jes_k6_workflow.jpg)
+
 ## Setup
 
 ### Install Keptn 
