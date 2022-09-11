@@ -1,4 +1,4 @@
-# K6 Extension (Prometheus Output) - Job Executor Service Demo
+# Performance Testing in Keptn using K6 : Prometheus Remote Write Extension [Part - 2]
 
 In the [previous tutorial](../k6-jes-example/README.md) we ran K6 script using Job Executor Service. In the current tutorial, we'll use [K6 Extension](https://k6.io/docs/extensions/) for publishing the test metrics to external tools. There are lots of available K6 extensions, explore them [here](https://k6.io/docs/extensions/getting-started/explore/). We'll use K6 Extention of Prometheus to export the test metrics. (Github: [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote))
 

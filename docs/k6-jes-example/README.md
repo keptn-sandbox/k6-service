@@ -1,4 +1,4 @@
-# K6 - Job Executor Service Demo
+# Performance Testing in Keptn using K6 [Part - 1]
 
 This tutorial will use Job Executor Service to execute K6 performance testing in a Keptn project. We'll start with running a K6 script and how the logs look. And then we'll modify the K6 script to see the behaviour when it fails.
 
