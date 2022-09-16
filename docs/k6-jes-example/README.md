@@ -75,6 +75,12 @@ This will add `config.yaml` and K6 test file to the `production` branch on `GIT_
 
 > \* Make sure the resources have been added successfully to the git repo for the execution of test *
 
+### Alternative Approach
+
+Users can skip this step and instead upload to Git directly if they choose. Users need to upload into the `{branch-name-which-matches-the-stage}` and path `{keptn-service-name}/{resourceUri-path}`.
+
+> For example: Inside `production` branch, in the folder `microserviceA/job/config.yaml`. 
+
 ## Understanding Resources
 
 ### Config
@@ -96,7 +102,7 @@ actions:
         args: ["run", "--duration", "30s", "--vus", "10", "/keptn/files/k6_test.js"]
 ```
 
-K6 docker image is pulled from `loadimpact/k6` and used for execution using the `k6 run` command. The file mentioned would be accessible from `/keptn/<resource-uri>`
+K6 docker image is pulled from `loadimpact/k6` and used for execution using the `k6 run` command. Inside the container, files are placed inside `/keptn/` path. So, `<resource-uri>` in Git becomes accessible from `/keptn/<resource-uri>`. 
 
 Any custom K6 Docker image could be used here, along with K6 binary created using K6 extensions. A common example would be [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote). We'll take a look at K6 extensions in the [next tutorial](../k6-prometheus-example/README.md)
 
@@ -129,7 +135,7 @@ Let's trigger the sequence using the command
 keptn trigger sequence --sequence testMyService --project k6-jes --service microserviceA --stage production
 ```
 
-You can trigger the sequence from Keptn Bridge too.
+You can trigger the sequence from Keptn Bridge or using [Keptn API](https://keptn.sh/docs/0.19.x/reference/api/) too.
 
 ### Success Trigger
 
