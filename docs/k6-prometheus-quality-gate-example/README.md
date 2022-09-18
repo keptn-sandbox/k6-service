@@ -20,9 +20,9 @@ This will the workflow of events for quality gates evaluation of K6 metrics in P
 
 [Previous tutorial's](../k6-prometheus-example/README.md) setup of Prometheus and K6 extension using JES would be required. Apart from that, we'll have to setup Prometheus Service and Lighthouse Service.
 
-### Prometheus Service
+### SLI Provider
 
-We'll have to install a SLI provider service which will inturn be called from Lighthouse Service. Prometheus Service of Keptn will do this job. Please install Prometheus Service from [here](https://github.com/keptn-contrib/prometheus-service).
+We'll have to install a [SLI provider](https://keptn.sh/docs/0.19.x/integrations/sli_provider/) service which will inturn be called from Lighthouse Service. SLI providers like Prometheus, Dynatrace, Datadog and many others can be used. We'll use Prometheus to get the SLI metrics. ***Prometheus Service*** of Keptn will do this job. Please install Prometheus Service from [here](https://github.com/keptn-contrib/prometheus-service).
 
 Things to note while installing:
 - Give correct namespace of installation of Prometheus of K8s
@@ -30,29 +30,17 @@ Things to note while installing:
 
 ### Lighthouse Service
 
-Lighthouse Service will be responsible for valuating test results. Whenever an event of the type `sh.keptn.event.evaluation.triggered` is received, it will take first determine the SLI (Service Level Indicator) data source (e.g., Prometheus or Dynatrace), as well as the required SLIs for the project. Afterwards, it will send out an event of the type `sh.keptn.event.get-sli.triggered`, to inform the respective data source services to retrieve the values for the SLIs defined in the `slo.yaml` file. It will be installed by default during installation of Keptn, if not installed then please follow steps in this [link](https://github.com/keptn/keptn/tree/master/lighthouse-service).
+Lighthouse Service will be responsible for evaluating test results. Whenever an event of the type `sh.keptn.event.evaluation.triggered` is received, and internally send `sh.keptn.event.get-sli.triggered`. The SLI provider tool will listen to it. When SLI provider has retrieved metrics from data source(e.g., Prometheus or Dynatrace), the SLI provider sends `sh.keptn.event.get-sli.finished`. The lighthouse service is also configured to listen for `sh.keptn.event.get-sli.finished` so it starts working again and this time it does the evaluation. It will be installed by default during installation of Keptn, if not installed then please follow steps in this [link](https://github.com/keptn/keptn/tree/master/lighthouse-service).
 
-#### Configuring a Data Soruce
+#### Configuring a Data Source
 
-We'll have to provide a data source for getting the SLI. For this we have to add a configmap for each project. We can do this by running this command
+We'll have to provide a data source for getting the SLI. For this we have to configure monitoring provider. We can do this by running this command
 
 ```bash
-kubectl apply -f config-map.yaml 
+keptn configure monitoring prometheus --project=k6-jes --service=microserviceA
 ```
 
-The `config-map.yaml` looks like this, we specify the `name` as `lighthouse-config-{PROJECT_NAME}`(`k6-jes` in this case) and sli provider (`prometheus`).
-
-```yaml
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: lighthouse-config-k6-jes
-  namespace: keptn
-data:
-  sli-provider: "prometheus"
-```
-
-More details of configuring a data source can be found [here](https://github.com/keptn/keptn/tree/master/lighthouse-service#configuring-a-data-source).
+More details of keptn configure monitoring command can be found [here](https://keptn.sh/docs/0.19.x/reference/cli/commands/keptn_configure_monitoring/). More details of configuring a data source can be found [here](https://github.com/keptn/keptn/tree/master/lighthouse-service#configuring-a-data-source).
 
 ## Updating Shipyard
 
