@@ -1,6 +1,21 @@
-# K6 - Job Executor Service Demo
+# Performance Testing in Keptn using K6 [Part - 1]
 
 This tutorial will use Job Executor Service to execute K6 performance testing in a Keptn project. We'll start with running a K6 script and how the logs look. And then we'll modify the K6 script to see the behaviour when it fails.
+
+## What is Keptn?
+
+[Keptn](https://keptn.sh/) is an event-driven orchestration engine that connects observability with operations in cloud-native applications. The project uses a declarative approach to build scalable automation for delivery and operations, evaluates Service Level Indicators (SLOs), and provides a dashboard, alerts, and auto-remediation for them. It allows us to define multi-stage delivery pipelines declaratively. 
+
+Keptn allows you to pick a use case and automate & integrate it in a more general way. Depending on the use case, you bring a configuration. For instance: 
+1. Quality Gates <> SLI/SLO config 
+2. Progressive Delivery <> Shipyard file
+3. Remediation <> Runbook for fixing systems
+
+## Keptn Job Executor Service & K6 Test Workflow
+
+This will the workflow of events in this tutorial.
+
+![Keptn JES K6 Workflow](./images/keptn_jes_k6_workflow.jpg)
 
 ## Setup
 
@@ -60,6 +75,12 @@ This will add `config.yaml` and K6 test file to the `production` branch on `GIT_
 
 > \* Make sure the resources have been added successfully to the git repo for the execution of test *
 
+### Alternative Approach
+
+Users can skip this step and instead upload to Git directly if they choose. Users need to upload into the `{branch-name-which-matches-the-stage}` and path `{keptn-service-name}/{resourceUri-path}`.
+
+> For example: Inside `production` branch, in the folder `microserviceA/job/config.yaml`. 
+
 ## Understanding Resources
 
 ### Config
@@ -81,9 +102,9 @@ actions:
         args: ["run", "--duration", "30s", "--vus", "10", "/keptn/files/k6_test.js"]
 ```
 
-K6 docker image is pulled from `loadimpact/k6` and used for execution using the `k6 run` command. The file mentioned would be accessible from `/keptn/<resource-uri>`
+K6 docker image is pulled from `loadimpact/k6` and used for execution using the `k6 run` command. Inside the container, files are placed inside `/keptn/` path. So, `<resource-uri>` in Git becomes accessible from `/keptn/<resource-uri>`. 
 
-Any custom K6 Docker image could be used here, along with K6 binary created using K6 extensions. A common example would be [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote). 
+Any custom K6 Docker image could be used here, along with K6 binary created using K6 extensions. A common example would be [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote). We'll take a look at K6 extensions in the [next tutorial](../k6-prometheus-example/README.md)
 
 ### K6 files
 
@@ -114,7 +135,7 @@ Let's trigger the sequence using the command
 keptn trigger sequence --sequence testMyService --project k6-jes --service microserviceA --stage production
 ```
 
-You can trigger the sequence from Keptn Bridge too.
+You can trigger the sequence from Keptn Bridge or using [Keptn API](https://keptn.sh/docs/0.19.x/reference/api/) too.
 
 ### Success Trigger
 
@@ -175,3 +196,7 @@ kubectl -n keptn-jes logs deployment/job-executor-service -f job-executor-servic
 ## Demo Link
 
 - The Demo Link to this tutorial can be found here - [YouTube](https://www.youtube.com/watch?v=MtjbvnDbhP8)
+
+## Next Tutorial
+
+Please follow the [next tutorial](../k6-prometheus-example/README.md) for running K6 Extension (Prometheus Output) in Job Executor Service.

@@ -1,0 +1,26 @@
+apiVersion: v2
+actions:
+  - name: "Run k6-prometheus"
+    events:
+      - name: "sh.keptn.event.test.triggered"
+    tasks:
+      - name: "Run k6 extensions with Keptn"
+        files:
+          - /files
+        image: "jvenom/k6-prometheus"
+        cmd:
+          - "k6"
+        args:
+          - "run"
+          - "--vus"
+          - "10" 
+          - "--duration"
+          - "30s"
+          - "/keptn/files/k6_test.js"
+          - "-o"
+          - "output-prometheus-remote"
+          - "--tag"
+          - "job=$(KEPTN_SERVICE)-$(KEPTN_PROJECT)-$(KEPTN_STAGE)"
+        env:
+          - name: k6-details
+            valueFrom: secret

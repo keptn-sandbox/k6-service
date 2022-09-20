@@ -9,3 +9,4 @@ spec:
         - name: "testMyService"
           tasks:
             - name: "test"
+            - name: "evaluation"
