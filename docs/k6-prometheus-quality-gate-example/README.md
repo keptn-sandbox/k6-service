@@ -1,4 +1,4 @@
-# Performance Testing in Keptn using K6 : Quality Gates Evaluation using K6 metrics in Prometheus [Part - 3]
+# Performance Testing in Keptn using K6 : Quality Gates Evaluation using K6 metrics in Prometheus [Part 3]
 
 In the [previous tutorial](../k6-prometheus-example/README.md) we ran K6 Prometheus Extension using Job Executor Service. In the current tutorial, we'll use those exported metrics for Quality Gates evaluation in in Keptn.  
 
