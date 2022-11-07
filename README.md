@@ -24,6 +24,8 @@ Altough we decided to go ahead with JES, the template for listening to `sh.keptn
 ## About 
 This repository contains details about my work in Google Summer of Code 2022. 
 
+- [Demo (YouTube video)](https://www.youtube.com/watch?v=fGePRAbyjwc)
+
 - [Project Page at GSOC 2022 website](https://summerofcode.withgoogle.com/programs/2022/projects/0xICJhw8)
 
 ## License
