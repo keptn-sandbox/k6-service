@@ -1,6 +1,6 @@
 # Performance Testing in Keptn using K6 : Prometheus Remote Write Extension [Part 2]
 
-In the [previous tutorial](../k6-jes-example/README.md) we ran K6 script using Job Executor Service. In the current tutorial, we'll use [K6 Extension](https://k6.io/docs/extensions/) for publishing the test metrics to external tools. There are lots of available K6 extensions, explore them [here](https://k6.io/docs/extensions/getting-started/explore/). We'll use K6 Extention of Prometheus to export the test metrics. (Github: [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote))
+In the [previous tutorial](https://k6.io/blog/performance-testing-in-keptn-using-k6/) we ran K6 script using Job Executor Service. In the current tutorial, we'll use [K6 Extension](https://k6.io/docs/extensions/) for publishing the test metrics to external tools. There are lots of available K6 extensions, explore them [here](https://k6.io/docs/extensions/getting-started/explore/). We'll use K6 Extention of Prometheus to export the test metrics. (Github: [xk6-output-prometheus-remote](https://github.com/grafana/xk6-output-prometheus-remote))
 
 ## K6 Extensions
 
@@ -45,7 +45,7 @@ We'll need three things set-up for this tutorial:
 
 ### Standard K6 service using JES
 
-Please follow the [previous tutorial](../k6-jes-example/README.md). This will help you setup 
+Please follow the [previous tutorial](https://k6.io/blog/performance-testing-in-keptn-using-k6/). This will help you setup 
 1. Keptn
 2. Job Executor Service
 3. Keptn Project using K6 for performance testing
