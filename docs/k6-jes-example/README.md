@@ -1,5 +1,5 @@
 
-On the k6 blog, check out the [tutorial to run k6 tests in Keptn](https://k6.io/blog/performance-testing-in-keptn-using-k6/).
+The tutorial providing the instructions for this example is available [here](https://k6.io/blog/performance-testing-in-keptn-using-k6/).
 
 ## Next Tutorial
 
