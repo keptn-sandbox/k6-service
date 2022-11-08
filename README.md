@@ -4,7 +4,7 @@
 ## Tutorials
 
 ### Performance Testing in Keptn using K6 [Part 1]
-In this tutorial we run standard K6 tests using [Job Executor Service](https://github.com/keptn-contrib/job-executor-service) of Keptn. Please find the tutorial [here](./docs/k6-jes-example/README.md).
+In this tutorial we run standard K6 tests using [Job Executor Service](https://github.com/keptn-contrib/job-executor-service) of Keptn. Please find the tutorial [here](https://k6.io/blog/performance-testing-in-keptn-using-k6/).
 
 ### Using K6 Extension in JES - Prometheus [Part 2]
 After running standard K6 in JES, we make use of K6 extensions for writing test metrics to extenal source. We'll use Prometheus remote write K6 extension. Please find the tutorial [here](./docs/k6-prometheus-example/README.md).
